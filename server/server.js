@@ -1,8 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
 import cors from "cors";
 import tmdbRoutes from "./routes/tmdb.js";
+
+dotenv.config();
 
 // Validate TMDB API key
 if (!process.env.TMDB_API_KEY) {
@@ -11,16 +12,30 @@ if (!process.env.TMDB_API_KEY) {
 }
 
 const app = express();
+
+// Configure CORS for both dev and production
 app.use(cors({
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://movie-app-react-three.vercel.app']  // replace with your actual Vercel domain
+    : 'http://localhost:3000',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
 }));
-//app.use(cors());
+
 app.use(express.json());
 
-// Mount TMDB routes
-app.use("/api/tmdb", tmdbRoutes);
+// Add wake-up route
+app.get("/", (req, res) => {
+  res.send("✅ TMDB Proxy Server Running");
+});
+
+// Mount TMDB routes at /api/tmdb
+app.use('/api/tmdb', tmdbRoutes);
+
+// Basic root route
+app.get('/', (req, res) => {
+  res.json({ message: 'Movie API Backend' });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

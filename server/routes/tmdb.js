@@ -4,6 +4,17 @@ import axios from "axios";
 const router = express.Router();
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
+// Add test endpoint
+router.get('/test', (req, res) => {
+  if (!process.env.TMDB_API_KEY) {
+    return res.status(500).json({ error: 'TMDB API key not configured' });
+  }
+  res.json({ 
+    message: 'TMDB API route working', 
+    timestamp: new Date().toISOString() 
+  });
+});
+
 // Allowed categories
 const validCategories = ["movie", "tv"];
 const validTypes = {
