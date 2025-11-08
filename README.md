@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+Movie App – Movie & TV Discovery SPA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Single Page Application (SPA) to browse, search, and view details of movies and TV shows using The Movie Database (TMDB) API. The app allows users to explore trending, top-rated, and upcoming media with detailed info including posters, overview, genres, cast, and trailers.
 
-## Available Scripts
+Problem Statement
 
-In the project directory, you can run:
+Movie enthusiasts often waste time switching between IMDb, Rotten Tomatoes, and streaming platforms to get movie details. This app aims to provide a centralized interface for:
 
-### `npm start`
+Searching movies and TV shows
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Browsing trending, top-rated, and upcoming titles
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Viewing detailed information (poster, overview, genres, casts, trailers)
 
-### `npm test`
+Navigating seamlessly without page reloads
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Trending / Top Rated / Upcoming Media Lists (Movies & TV Shows)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Search by title (movie or TV)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Movie/TV Details Page: poster, title, overview, genres, cast, trailers, similar items
 
-### `npm run eject`
+Responsive UI for mobile and desktop
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Error Handling for API failures or no results
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Planned Features: Favorites list, user authentication, live search suggestions.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Frontend: React.js (SPA)
+Routing: React Router DOM
+API: TMDB API via Express proxy
+Styling: SCSS + Boxicons + Swiper.js
+State Management: React Hooks, localStorage (planned for Favorites)
+HTTP Client: Axios
+Backend (Proxy): Node.js + Express
+Version Control: GitHub
 
-## Learn More
+Wireframes / Screens
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Home Page: HeroSlide + MovieList sections (Trending, Top Rated, Upcoming)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Catalog / Search: Grid of search results via MovieGrid
 
-### Code Splitting
+Detail Page: Poster/backdrop, title, overview, genres, top cast, trailers, similar items
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Navigation: Header with Home, Catalog (and future Favorites)
 
-### Analyzing the Bundle Size
+API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The backend acts as a proxy to TMDB API.
 
-### Making a Progressive Web App
+Endpoint	Method	Description
+/api/tmdb/test	GET	Test TMDB connection
+/api/tmdb/:category/:type	GET	Fetch movies/TV lists (e.g., /api/tmdb/movie/popular)
+/api/tmdb/search/:category	GET	Search titles by name (e.g., /api/tmdb/search/movie?query=Inception)
+/api/tmdb/:category/:id	GET	Fetch details for a movie/TV show
+/api/tmdb/:category/:id/credits	GET	Fetch cast/crew for a movie/TV show
+/api/tmdb/:category/:id/videos	GET	Fetch trailers (YouTube)
+/api/tmdb/:category/:id/similar	GET	Fetch similar movies/TV shows
+Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Clone the repository:
 
-### Advanced Configuration
+git clone <your-repo-link>
+cd movie-app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+Install backend dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+cd server
+npm install
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Create .env file in /server with:
+
+TMDB_API_KEY=your_tmdb_api_key
+PORT=5000
+
+
+Start backend server:
+
+npx nodemon server.js
+
+
+Install frontend dependencies:
+
+cd ../src
+npm install
+npm start
+
+
+Access app at http://localhost:3000.
+
+Folder Structure
+movie-app/
+├── server/                  # Backend
+│   ├── routes/tmdb.js       # TMDB API proxy
+│   ├── .env                 # Environment variables
+│   ├── package.json
+│   └── server.js            # Express server setup
+│
+├── src/                     # Frontend
+│   ├── api/                 # Axios & API methods
+│   ├── components/          # UI components (Header, Footer, MovieCard, MovieGrid, HeroSlide, etc.)
+│   ├── pages/               # Home, Catalog, Detail pages
+│   ├── scss/                # SCSS variables, breakpoints, index
+│   ├── App.jsx
+│   └── index.js
+├── public/
+│   └── index.html
+├── package.json
+└── README.md
