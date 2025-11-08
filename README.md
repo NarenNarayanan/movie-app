@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# 🎬 Cinefy – Movie & TV Discovery SPA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Cinefy is a sleek Single Page Application (SPA) to browse, search, and explore movies and TV shows using **The Movie Database (TMDB) API**.  
+It delivers a smooth browsing experience with trailers, cast info, similar titles and more — all without page reloads.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⭐ Problem Statement
 
-### `npm start`
+Movie fans often shuffle between IMDb, streaming apps, and Google to find information about movies and shows.  
+This app provides a **centralized platform** where users can:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🔍 Search movies and TV shows instantly
+- 🎞️ Browse trending, top-rated, and upcoming content
+- 📖 View detailed info (cast, genres, overview, ratings)
+- 🎥 Watch official trailers
+- 🚀 Navigate seamlessly in an SPA interface
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✨ Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Feature | Description |
+|--------|-------------|
+| Trending, Top Rated & Upcoming Lists | Browse curated media collections |
+| Search with Category Toggle | Search movies & TV shows |
+| Detailed Media Page | Poster, overview, genres, cast & crew |
+| Trailers | Embedded YouTube trailers |
+| Similar Recommendations | Suggests related movies/TV shows |
+| Responsive | Works on desktop and mobile |
+| Graceful Error Handling | Handles missing data / API failures |
+| Planned | Favorites, Login, Live Search Suggestions |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧰 Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Layer | Technology |
+|------|------------|
+| Frontend | **React.js** (SPA) |
+| Routing | React Router DOM |
+| Styling | SCSS, Boxicons, Swiper.js |
+| Backend Proxy | Node.js + Express |
+| API Source | TMDB API |
+| HTTP Client | Axios |
+| Version Control | Git + GitHub |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🔗 API Endpoints (via Express Proxy)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Endpoint | Method | Description |
+|---------|--------|-------------|
+| `/api/tmdb/test` | GET | Verify TMDB connection |
+| `/api/tmdb/:category/:type` | GET | Fetch lists (e.g., trending, popular) |
+| `/api/tmdb/search/:category?query=` | GET | Search movies/TV shows |
+| `/api/tmdb/:category/:id` | GET | Get details of a movie/TV |
+| `/api/tmdb/:category/:id/credits` | GET | Cast & crew |
+| `/api/tmdb/:category/:id/videos` | GET | Trailers (YouTube) |
+| `/api/tmdb/:category/:id/similar` | GET | Similar titles |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🚀 Setup Instructions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 1️⃣ Clone the Project
+```bash
+git clone <your-repo-link>
+cd movie-app
+```
+### 2️⃣ Backend Setup
+```bash
+cd server
+npm install
+```
 
-## Learn More
+Create a .env file inside /server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+TMDB_API_KEY=your_tmdb_api_key
+PORT=5000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Start backend:
 
-### Code Splitting
+npx nodemon server.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3️⃣ Frontend Setup
+```bash
+cd ../src
+npm install
+npm start
+```
 
-### Analyzing the Bundle Size
+The app will run at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+http://localhost:3000
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 📂 Folder Structure
+```bash
+movie-app/
+├── server/                  # Backend (Express Proxy)
+│   ├── routes/tmdb.js
+│   ├── .env
+│   └── server.js
+│
+├── src/                     # Frontend (React SPA)
+│   ├── api/
+│   ├── components/
+│   ├── pages/
+│   ├── scss/
+│   ├── App.jsx
+│   └── index.js
+│
+├── public/
+│   └── index.html
+└── README.md
+```
