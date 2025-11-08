@@ -1,21 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { useParams } from "react-router";
-
 import tmdbApi from "../../api/tmdbApi";
 
-const VideoList = (props) => {
+const VideoList = ({ id }) => {
   const { category } = useParams();
-
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const getVideos = async () => {
-      const response = await tmdbApi.getVideos(category, props.id);
-      setVideos(response.results.slice(0, 5));
+      try {
+        const response = await tmdbApi.getVideos(category, id);
+
+        // ✅ response is already data
+        // ✅ response.results may be undefined -> fallback to []
+        setVideos((response.results || []).slice(0, 5));
+      } catch (err) {
+        console.log("Video fetch error:", err);
+      }
     };
     getVideos();
-  }, [category, props.id]);
+  }, [category, id]);
 
   return (
     <>
@@ -26,9 +30,7 @@ const VideoList = (props) => {
   );
 };
 
-const Video = (props) => {
-  const item = props.item;
-
+const Video = ({ item }) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {

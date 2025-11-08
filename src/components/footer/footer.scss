@@ -6,6 +6,17 @@
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
+  .footer {
+    color: #f5c842;
+
+    a, span, p, li {
+      color: inherit;
+    }
+
+    svg {
+      fill: currentColor;
+    }
+  }
 
   &__content {
     max-width: 1000px;

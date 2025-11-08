@@ -1,10 +1,8 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
-import tmdbRoutes from "./routes/tmdb.js";
-
-// Load environment variables early
 dotenv.config();
+import cors from "cors";
+import tmdbRoutes from "./routes/tmdb.js";
 
 // Validate TMDB API key
 if (!process.env.TMDB_API_KEY) {

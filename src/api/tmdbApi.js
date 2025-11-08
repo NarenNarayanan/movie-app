@@ -18,34 +18,20 @@ export const tvType = {
 };
 
 const tmdbApi = {
-  getMoviesList: (type, params) => {
-    const url = `/movie/${movieType[type]}`; // Add leading slash
-    return axiosClient.get(url, { params }); // Fix params format
-  },
-  getTvList: (type, params) => {
-    const url = `tv/${tvType[type]}`; // Remove leading slash to match backend
-    return axiosClient.get(url, { params }); // Fix params format
-  },
-  getVideos: (cate, id) => {
-    const url = category[cate] + "/" + id + "/videos";
-    return axiosClient.get(url, { params: {} });
-  },
-  search: (cate, params) => {
-    const url = `/search/${category[cate]}`; // Add leading slash
-    return axiosClient.get(url, { params }); // Fix params format
-  },
-  detail: (cate, id, params) => {
-    const url = category[cate] + "/" + id;
-    return axiosClient.get(url, params);
-  },
-  credits: (cate, id) => {
-    const url = category[cate] + "/" + id + "/credits";
-    return axiosClient.get(url, { params: {} });
-  },
-  similar: (cate, id) => {
-    const url = category[cate] + "/" + id + "/similar";
-    return axiosClient.get(url, { params: {} });
-  },
+  getMoviesList: (type, params) => axiosClient.get(`/movie/${movieType[type]}`, { params }),
+
+  getTvList: (type, params) => axiosClient.get(`/tv/${tvType[type]}`, { params }),
+
+  search: (cate, params) => axiosClient.get(`/search/${category[cate]}`, { params }),
+
+  detail: (cate, id, params) => axiosClient.get(`/${category[cate]}/detail/${id}`, { params }),
+
+  credits: (cate, id) => axiosClient.get(`/${category[cate]}/${id}/credits`),
+
+  similar: (cate, id) => axiosClient.get(`/${category[cate]}/${id}/similar`),
+
+  
+  getVideos: (cate, id) => axiosClient.get(`/${category[cate]}/${id}/videos`),
 };
 
 export default tmdbApi;
