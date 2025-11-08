@@ -1,117 +1,116 @@
-Movie App – Movie & TV Discovery SPA
+# 🎬 Cinefy – Movie & TV Discovery SPA
 
-A Single Page Application (SPA) to browse, search, and view details of movies and TV shows using The Movie Database (TMDB) API. The app allows users to explore trending, top-rated, and upcoming media with detailed info including posters, overview, genres, cast, and trailers.
+Cinefy is a sleek Single Page Application (SPA) to browse, search, and explore movies and TV shows using **The Movie Database (TMDB) API**.  
+It delivers a smooth browsing experience with trailers, cast info, similar titles and more — all without page reloads.
 
-Problem Statement
+---
 
-Movie enthusiasts often waste time switching between IMDb, Rotten Tomatoes, and streaming platforms to get movie details. This app aims to provide a centralized interface for:
+## ⭐ Problem Statement
 
-Searching movies and TV shows
+Movie fans often shuffle between IMDb, streaming apps, and Google to find information about movies and shows.  
+This app provides a **centralized platform** where users can:
 
-Browsing trending, top-rated, and upcoming titles
+- 🔍 Search movies and TV shows instantly
+- 🎞️ Browse trending, top-rated, and upcoming content
+- 📖 View detailed info (cast, genres, overview, ratings)
+- 🎥 Watch official trailers
+- 🚀 Navigate seamlessly in an SPA interface
 
-Viewing detailed information (poster, overview, genres, casts, trailers)
+---
 
-Navigating seamlessly without page reloads
+## ✨ Features
 
+| Feature | Description |
+|--------|-------------|
+| Trending, Top Rated & Upcoming Lists | Browse curated media collections |
+| Search with Category Toggle | Search movies & TV shows |
+| Detailed Media Page | Poster, overview, genres, cast & crew |
+| Trailers | Embedded YouTube trailers |
+| Similar Recommendations | Suggests related movies/TV shows |
+| Responsive | Works on desktop and mobile |
+| Graceful Error Handling | Handles missing data / API failures |
+| Planned | Favorites, Login, Live Search Suggestions |
 
-Features
+---
 
-Trending / Top Rated / Upcoming Media Lists (Movies & TV Shows)
+## 🧰 Tech Stack
 
-Search by title (movie or TV)
+| Layer | Technology |
+|------|------------|
+| Frontend | **React.js** (SPA) |
+| Routing | React Router DOM |
+| Styling | SCSS, Boxicons, Swiper.js |
+| Backend Proxy | Node.js + Express |
+| API Source | TMDB API |
+| HTTP Client | Axios |
+| Version Control | Git + GitHub |
 
-Movie/TV Details Page: poster, title, overview, genres, cast, trailers, similar items
+---
 
-Responsive UI for mobile and desktop
+## 🔗 API Endpoints (via Express Proxy)
 
-Error Handling for API failures or no results
+| Endpoint | Method | Description |
+|---------|--------|-------------|
+| `/api/tmdb/test` | GET | Verify TMDB connection |
+| `/api/tmdb/:category/:type` | GET | Fetch lists (e.g., trending, popular) |
+| `/api/tmdb/search/:category?query=` | GET | Search movies/TV shows |
+| `/api/tmdb/:category/:id` | GET | Get details of a movie/TV |
+| `/api/tmdb/:category/:id/credits` | GET | Cast & crew |
+| `/api/tmdb/:category/:id/videos` | GET | Trailers (YouTube) |
+| `/api/tmdb/:category/:id/similar` | GET | Similar titles |
 
-Planned Features: Favorites list, user authentication, live search suggestions.
+---
 
-Tech Stack
+## 🚀 Setup Instructions
 
-Frontend: React.js (SPA)
-Routing: React Router DOM
-API: TMDB API via Express proxy
-Styling: SCSS + Boxicons + Swiper.js
-State Management: React Hooks, localStorage (planned for Favorites)
-HTTP Client: Axios
-Backend (Proxy): Node.js + Express
-Version Control: GitHub
-
-Wireframes / Screens
-
-Home Page: HeroSlide + MovieList sections (Trending, Top Rated, Upcoming)
-
-Catalog / Search: Grid of search results via MovieGrid
-
-Detail Page: Poster/backdrop, title, overview, genres, top cast, trailers, similar items
-
-Navigation: Header with Home, Catalog (and future Favorites)
-
-API Endpoints
-
-The backend acts as a proxy to TMDB API.
-
-Endpoint	Method	Description
-/api/tmdb/test	GET	Test TMDB connection
-/api/tmdb/:category/:type	GET	Fetch movies/TV lists (e.g., /api/tmdb/movie/popular)
-/api/tmdb/search/:category	GET	Search titles by name (e.g., /api/tmdb/search/movie?query=Inception)
-/api/tmdb/:category/:id	GET	Fetch details for a movie/TV show
-/api/tmdb/:category/:id/credits	GET	Fetch cast/crew for a movie/TV show
-/api/tmdb/:category/:id/videos	GET	Fetch trailers (YouTube)
-/api/tmdb/:category/:id/similar	GET	Fetch similar movies/TV shows
-Setup Instructions
-
-Clone the repository:
-
+### 1️⃣ Clone the Project
+```bash
 git clone <your-repo-link>
 cd movie-app
-
-
-Install backend dependencies:
-
+```
+### 2️⃣ Backend Setup
+```bash
 cd server
 npm install
+```
 
-
-Create .env file in /server with:
+Create a .env file inside /server:
 
 TMDB_API_KEY=your_tmdb_api_key
 PORT=5000
 
-
-Start backend server:
+Start backend:
 
 npx nodemon server.js
 
-
-Install frontend dependencies:
-
+### 3️⃣ Frontend Setup
+```bash
 cd ../src
 npm install
 npm start
+```
 
+The app will run at:
 
-Access app at http://localhost:3000.
+http://localhost:3000
 
-Folder Structure
+### 📂 Folder Structure
+```bash
 movie-app/
-├── server/                  # Backend
-│   ├── routes/tmdb.js       # TMDB API proxy
-│   ├── .env                 # Environment variables
-│   ├── package.json
-│   └── server.js            # Express server setup
+├── server/                  # Backend (Express Proxy)
+│   ├── routes/tmdb.js
+│   ├── .env
+│   └── server.js
 │
-├── src/                     # Frontend
-│   ├── api/                 # Axios & API methods
-│   ├── components/          # UI components (Header, Footer, MovieCard, MovieGrid, HeroSlide, etc.)
-│   ├── pages/               # Home, Catalog, Detail pages
-│   ├── scss/                # SCSS variables, breakpoints, index
+├── src/                     # Frontend (React SPA)
+│   ├── api/
+│   ├── components/
+│   ├── pages/
+│   ├── scss/
 │   ├── App.jsx
 │   └── index.js
+│
 ├── public/
 │   └── index.html
-├── package.json
 └── README.md
+```
