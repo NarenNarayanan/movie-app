@@ -5,40 +5,28 @@ import tmdbRoutes from "./routes/tmdb.js";
 
 dotenv.config();
 
-// Validate TMDB API key
-if (!process.env.TMDB_API_KEY) {
-  console.error("ERROR: TMDB_API_KEY not found in environment variables");
-  process.exit(1);
-}
-
 const app = express();
 
-// Configure CORS for both dev and production
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://movie-app-react-three.vercel.app']  // replace with your actual Vercel domain
-    : 'http://localhost:3000',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-}));
-
+// Allow cross-origin requests (adjust origin in production as needed)
+app.use(cors());
 app.use(express.json());
 
-// Add wake-up route
+// Root wake-up route (used by frontend to wake sleeping Render instance)
 app.get("/", (req, res) => {
-  res.send("✅ TMDB Proxy Server Running");
+  return res.json({ status: "ok", message: "✅ TMDB Proxy Server Running" });
 });
 
-// Mount TMDB routes at /api/tmdb
-app.use('/api/tmdb', tmdbRoutes);
+// Mount TMDB proxy routes at /api/tmdb
+app.use("/api/tmdb", tmdbRoutes);
 
-// Basic root route
-app.get('/', (req, res) => {
-  res.json({ message: 'Movie API Backend' });
-});
+// Warn if TMDB key is missing but do not crash the server (so health checks+wake pings work)
+if (!process.env.TMDB_API_KEY) {
+  console.warn("WARNING: TMDB_API_KEY not found in environment variables. TMDB requests will fail until configured.");
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Test TMDB connection at: http://localhost:${PORT}/api/tmdb/test`);
+  console.log(`TMDB routes mounted at: /api/tmdb`);
+  console.log(`Health check: http://localhost:${PORT}/ (or your Render URL `/`` + `)`);
 });
