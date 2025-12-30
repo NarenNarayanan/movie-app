@@ -1,24 +1,24 @@
-# 🎬 Cinefy – Movie & TV Discovery SPA
+# Cinefy – Movie & TV Discovery SPA
 
 Cinefy is a sleek Single Page Application (SPA) to browse, search, and explore movies and TV shows using **The Movie Database (TMDB) API**.  
 It delivers a smooth browsing experience with trailers, cast info, similar titles and more — all without page reloads.
 
 ---
 
-## ⭐ Problem Statement
+##  Problem Statement
 
 Movie fans often shuffle between IMDb, streaming apps, and Google to find information about movies and shows.  
 This app provides a **centralized platform** where users can:
 
-- 🔍 Search movies and TV shows instantly
-- 🎞️ Browse trending, top-rated, and upcoming content
-- 📖 View detailed info (cast, genres, overview, ratings)
-- 🎥 Watch official trailers
-- 🚀 Navigate seamlessly in an SPA interface
+-  Search movies and TV shows instantly
+-  Browse trending, top-rated, and upcoming content
+-  View detailed info (cast, genres, overview, ratings)
+-  Watch official trailers
+-  Navigate seamlessly in an SPA interface
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 |--------|-------------|
@@ -33,7 +33,7 @@ This app provides a **centralized platform** where users can:
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |------|------------|
@@ -61,9 +61,9 @@ This app provides a **centralized platform** where users can:
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
-### 1️⃣ Clone the Project
+### 1️ Clone the Project
 ```bash
 git clone <your-repo-link>
 cd movie-app
@@ -94,7 +94,7 @@ The app will run at:
 
 http://localhost:3000
 
-### 📂 Folder Structure
+### Folder Structure
 ```bash
 movie-app/
 ├── server/                  # Backend (Express Proxy)
